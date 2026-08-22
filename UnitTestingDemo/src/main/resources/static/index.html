@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Testing & REST API Manager - UnitTestingDemo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #6366f1;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 20px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            padding: 16px 24px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover, .btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .h2-link {
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .h2-link:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .url-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #334155;
+            margin-bottom: 16px;
+        }
+
+        .json-viewer {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            min-height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="title">
+            🧪 JUnit 5 & Mockito Unit Testing API Manager
+            <span class="badge">JUnit 5 + Mockito</span>
+        </div>
+        <a href="/h2-console" target="_blank" class="h2-link">⚡ Open H2 Console (/h2-console)</a>
+    </div>
+
+    <div class="controls">
+        <button class="btn active" onclick="loadData('/api/products', 'GET', null, this)">📦 GET All Products (/api/products)</button>
+        <button class="btn" onclick="loadData('/api/products/1', 'GET', null, this)">🔍 GET Product #1 (/api/products/1)</button>
+        <button class="btn" onclick="createSampleProduct(this)">➕ POST Create Product (/api/products)</button>
+    </div>
+
+    <div class="content">
+        <div class="url-box" id="urlDisplay">GET http://localhost:8080/api/products</div>
+        <pre class="json-viewer" id="jsonDisplay">Loading products...</pre>
+    </div>
+</div>
+
+<script>
+    async function loadData(endpoint, method, body, btn) {
+        if (btn) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        document.getElementById('urlDisplay').innerText = `${method} http://localhost:8080${endpoint}`;
+        const jsonDisplay = document.getElementById('jsonDisplay');
+        jsonDisplay.innerText = 'Fetching live response...';
+
+        try {
+            const options = { method: method, headers: { 'Content-Type': 'application/json' } };
+            if (body) options.body = JSON.stringify(body);
+
+            const response = await fetch(endpoint, options);
+            const data = await response.json();
+            jsonDisplay.innerText = JSON.stringify(data, null, 2);
+        } catch (error) {
+            jsonDisplay.innerText = `Error: ${error.message}`;
+        }
+    }
+
+    function createSampleProduct(btn) {
+        const newProduct = {
+            name: "Smart Watch Series 9",
+            category: "Electronics",
+            price: 349.99,
+            quantity: 30
+        };
+        loadData('/api/products', 'POST', newProduct, btn);
+    }
+
+    loadData('/api/products', 'GET', null, document.querySelector('.btn'));
+</script>
+
+</body>
+</html>
