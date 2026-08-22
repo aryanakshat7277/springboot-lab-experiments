@@ -138,21 +138,21 @@
 <div class="container">
     <div class="header">
         <div class="title">
-            🧪 JUnit 5 & Mockito Unit Testing API Manager
+            🧪 JUnit 5 & Mockito Employee API Manager
             <span class="badge">JUnit 5 + Mockito</span>
         </div>
         <a href="/h2-console" target="_blank" class="h2-link">⚡ Open H2 Console (/h2-console)</a>
     </div>
 
     <div class="controls">
-        <button class="btn active" onclick="loadData('/api/products', 'GET', null, this)">📦 GET All Products (/api/products)</button>
-        <button class="btn" onclick="loadData('/api/products/1', 'GET', null, this)">🔍 GET Product #1 (/api/products/1)</button>
-        <button class="btn" onclick="createSampleProduct(this)">➕ POST Create Product (/api/products)</button>
+        <button class="btn active" onclick="loadData('/api/employees', 'GET', null, this)">👥 GET All Employees (/api/employees)</button>
+        <button class="btn" onclick="loadData('/api/employees/1', 'GET', null, this)">🔍 GET Employee #1 (/api/employees/1)</button>
+        <button class="btn" onclick="createSampleEmployee(this)">➕ POST Create Employee (/api/employees)</button>
     </div>
 
     <div class="content">
-        <div class="url-box" id="urlDisplay">GET http://localhost:8080/api/products</div>
-        <pre class="json-viewer" id="jsonDisplay">Loading products...</pre>
+        <div class="url-box" id="urlDisplay">GET http://localhost:8080/api/employees</div>
+        <pre class="json-viewer" id="jsonDisplay">Loading employees...</pre>
     </div>
 </div>
 
@@ -179,17 +179,16 @@
         }
     }
 
-    function createSampleProduct(btn) {
-        const newProduct = {
-            name: "Smart Watch Series 9",
-            category: "Electronics",
-            price: 349.99,
-            quantity: 30
+    function createSampleEmployee(btn) {
+        const newEmployee = {
+            firstName: "Ramesh",
+            lastName: "Fadatare",
+            email: "ramesh@gmail.com"
         };
-        loadData('/api/products', 'POST', newProduct, btn);
+        loadData('/api/employees', 'POST', newEmployee, btn);
     }
 
-    loadData('/api/products', 'GET', null, document.querySelector('.btn'));
+    loadData('/api/employees', 'GET', null, document.querySelector('.btn'));
 </script>
 
 </body>

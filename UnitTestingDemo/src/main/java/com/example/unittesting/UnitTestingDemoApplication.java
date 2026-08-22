@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 
-import com.example.unittesting.entity.Product;
-import com.example.unittesting.repository.ProductRepository;
+import com.example.unittesting.entity.Employee;
+import com.example.unittesting.repository.EmployeeRepository;
 
 @SpringBootApplication
 public class UnitTestingDemoApplication {
@@ -17,12 +17,12 @@ public class UnitTestingDemoApplication {
     }
 
     @Bean
-    @ConditionalOnBean(ProductRepository.class)
-    public CommandLineRunner initData(ProductRepository productRepository) {
+    @ConditionalOnBean(EmployeeRepository.class)
+    public CommandLineRunner initData(EmployeeRepository employeeRepository) {
         return args -> {
-            if (productRepository.count() == 0) {
-                productRepository.save(new Product("Gaming Laptop", "Electronics", 1299.99, 15));
-                productRepository.save(new Product("Wireless Headphones", "Accessories", 199.99, 50));
+            if (employeeRepository.count() == 0) {
+                employeeRepository.save(new Employee("Alex", "Mercer", "alex.mercer@example.com"));
+                employeeRepository.save(new Employee("Sophia", "Chen", "sophia.chen@example.com"));
             }
         };
     }
