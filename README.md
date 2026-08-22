@@ -8,7 +8,8 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 | Project Directory | Description | Primary Features & Endpoints |
 |---|---|---|
-| 🧪 **`UnitTestingDemo`** | Unit Testing with JUnit 5 & Mockito (Parts 1 & 2) | Service & Controller tests (`@ExtendWith`, `@Mock`, `@InjectMocks`, `MockMvc`, `doNothing()`, `assertThrows()`) |
+| 🧪 **`JUnitDemo`** *(Part 1 Video)* | Unit Testing with JUnit 5 & Spring Data JPA | `@DataJpaTest`, `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll`, Custom JPQL & Native SQL testing |
+| 🎭 **`MockitoDemo`** *(Part 2 Video)* | Advanced Unit Testing with Mockito Framework | Service & Controller mocking (`@ExtendWith(MockitoExtension.class)`, `@Mock`, `@InjectMocks`, `@MockBean`, `willDoNothing()`, `assertThrows()`) |
 | ⚡ **`MultiDatabases`** | Connecting to Multiple DataSources in Spring Data JPA | Dual H2 Databases (`bookdb` & `studentdb`), `@Primary` configuration, `/api/all`, `/api/db1/books`, `/api/db2/students` |
 | 🔐 **`SpringSecurityDemo`** | Role-Based Access Control (RBAC) & Spring Security | `/welcome` (Public), `/user` (`ROLE_USER`), `/admin` (`ROLE_ADMIN`), 403 Forbidden handling |
 | 🎓 **`StudentCRUD`** | Spring Data JPA CRUD Operations & Interactive Web UI | H2 Database (`/h2-console`), REST endpoints (`/api/students`), Interactive Web REST Client (`/`) |
@@ -48,8 +49,8 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## ▶️ Running an Experiment in STS
 
-1. In **Package Explorer**, expand the desired project (e.g. `UnitTestingDemo`).
-2. Expand `src/main/java` → find the main application class (e.g. `UnitTestingDemoApplication.java`).
+1. In **Package Explorer**, expand the desired project (e.g. `MockitoDemo`).
+2. Expand `src/main/java` → find the main application class (e.g. `MockitoDemoApplication.java`).
 3. **Right-click** on the main class file → **Run As** → **Spring Boot App**.
 4. Check the **Console** panel at the bottom to verify server startup on port `8080`.
 
@@ -57,39 +58,42 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## 🧪 Running Unit Tests in STS / Maven
 
-To run the JUnit 5 & Mockito test suite:
-
+### 1. `JUnitDemo` (Part 1 - JUnit 5 Suite):
 ```bash
-cd UnitTestingDemo
+cd JUnitDemo
 mvn clean test
 ```
 
-Or in STS: Right-click `ProductServiceTest.java` or `ProductControllerTest.java` → **Run As** → **JUnit Test**.
+### 2. `MockitoDemo` (Part 2 - Mockito Suite):
+```bash
+cd MockitoDemo
+mvn clean test
+```
+
+Or in STS: Right-click any test class → **Run As** → **JUnit Test**.
 
 ---
 
 ## 🔑 Credentials & Endpoints Summary
 
-### 1. `UnitTestingDemo` (Port 8080)
-* **Interactive Dashboard**: `http://localhost:8080/`
+### 1. `JUnitDemo` (Port 8080)
 * **H2 Console**: `http://localhost:8080/h2-console`
-* **REST Endpoints**: `/api/products` (GET, POST, PUT, DELETE)
+* **Test Suite**: `EmployeeRepositoryTests.java` (Tests save, find, JPQL, Native SQL queries)
 
-### 2. `MultiDatabases` (Port 8080)
+### 2. `MockitoDemo` (Port 8080)
+* **Interactive Dashboard**: `http://localhost:8080/`
+* **REST Endpoints**: `/api/employees` (GET, POST, PUT, DELETE)
+* **Test Suites**: `EmployeeServiceTests.java` & `EmployeeControllerTests.java`
+
+### 3. `MultiDatabases` (Port 8080)
 * **Interactive Dashboard**: `http://localhost:8080/`
 * **Combined Dual DB Endpoint**: `http://localhost:8080/api/all`
-* **DB1 Books Endpoint**: `http://localhost:8080/api/db1/books`
-* **DB2 Students Endpoint**: `http://localhost:8080/api/db2/students`
 
-### 3. `SpringSecurityDemo` (Port 8080)
+### 4. `SpringSecurityDemo` (Port 8080)
 * **Public Welcome**: `http://localhost:8080/welcome`
 * **User Endpoint**: `http://localhost:8080/user` *(Username: `user` \| Password: `user`)*
 * **Admin Endpoint**: `http://localhost:8080/admin` *(Username: `admin` \| Password: `admin`)*
 * **Logout**: `http://localhost:8080/logout`
-
-### 4. `StudentCRUD` (Port 8080)
-* **Interactive Web REST Client**: `http://localhost:8080/`
-* **H2 Console**: `http://localhost:8080/h2-console`
 
 ---
 
