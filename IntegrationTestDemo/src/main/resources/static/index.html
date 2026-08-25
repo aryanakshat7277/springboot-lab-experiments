@@ -3,198 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integration Testing API Manager - IntegrationTestDemo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <title>Product Management - IntegrationTestDemo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --primary: #0284c7;
-            --success: #16a34a;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 24px;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
         }
 
-        .container {
+        .main-card {
             width: 100%;
-            max-width: 1100px;
-            background: var(--card-bg);
+            max-width: 900px;
+            background: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 32px;
         }
 
-        .header {
-            padding: 20px 24px;
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .title {
-            font-size: 1.2rem;
+        h1 {
+            font-size: 1.5rem;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: #1e293b;
+            margin-bottom: 8px;
         }
 
-        .badge {
-            font-size: 0.75rem;
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 2px 10px;
-            border-radius: 999px;
-            font-weight: 600;
+        p.subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
         }
 
-        .controls {
-            display: flex;
-            gap: 10px;
-            padding: 16px 24px;
-            background: #f1f5f9;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid var(--border-color);
-            background: #ffffff;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn:hover, .btn.active {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-        }
-
-        .h2-link {
-            font-size: 0.85rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .h2-link:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            padding: 24px;
-        }
-
-        .url-box {
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 12px;
             background: #f8fafc;
-            border: 1px solid var(--border-color);
-            padding: 10px 14px;
-            border-radius: 6px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            color: #334155;
-            margin-bottom: 16px;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+            align-items: center;
         }
 
-        .json-viewer {
-            background: #0f172a;
-            color: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
+        input {
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
             font-size: 0.9rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            min-height: 300px;
+            outline: none;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+
+        .btn-add {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-add:hover {
+            background: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+
+        .badge-count {
+            background: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            margin-left: 8px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <div class="title">
-            🚀 Spring Boot Integration Testing Manager (JavaTechie)
-            <span class="badge">Integration Tests + H2</span>
-        </div>
-        <a href="/h2-console" target="_blank" class="h2-link">⚡ Open H2 Console (/h2-console)</a>
+<div class="main-card">
+    <h1>📦 Product Management Dashboard</h1>
+    <p class="subtitle">Spring Boot Integration Testing Demo Application</p>
+
+    <!-- Add Product Form -->
+    <div class="form-grid">
+        <input type="text" id="name" placeholder="Product Name (e.g. Headphone)" required />
+        <input type="number" id="quantity" placeholder="Qty" min="1" required />
+        <input type="number" step="0.01" id="price" placeholder="Price ($)" required />
+        <button class="btn-add" onclick="addProduct()">+ Add Product</button>
     </div>
 
-    <div class="controls">
-        <button class="btn active" onclick="loadData('/products', 'GET', null, this)">📦 GET All Products (/products)</button>
-        <button class="btn" onclick="loadData('/products/1', 'GET', null, this)">🔍 GET Product #1 (/products/1)</button>
-        <button class="btn" onclick="createSampleProduct(this)">➕ POST Add Product (/products/addProduct)</button>
-    </div>
-
-    <div class="content">
-        <div class="url-box" id="urlDisplay">GET http://localhost:8080/products</div>
-        <pre class="json-viewer" id="jsonDisplay">Loading products...</pre>
-    </div>
+    <!-- Product List Table -->
+    <h2>All Products <span class="badge-count" id="productCount">0</span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price ($)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+            <tr>
+                <td colspan="5" style="text-align: center; color: #94a3b8;">Loading products...</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <script>
-    async function loadData(endpoint, method, body, btn) {
-        if (btn) {
-            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+    const API_URL = '/products';
 
-        document.getElementById('urlDisplay').innerText = `${method} http://localhost:8080${endpoint}`;
-        const jsonDisplay = document.getElementById('jsonDisplay');
-        jsonDisplay.innerText = 'Fetching live response...';
+    // Fetch and display all products
+    async function loadProducts() {
+        try {
+            const response = await fetch(API_URL);
+            const products = await response.json();
+            
+            document.getElementById('productCount').innerText = products.length;
+            const tbody = document.getElementById('productTableBody');
+            
+            if (products.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #94a3b8;">No products found in database.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td><strong>#${p.id}</strong></td>
+                    <td>${p.name}</td>
+                    <td>${p.quantity}</td>
+                    <td>$${p.price.toFixed(2)}</td>
+                    <td>
+                        <button class="btn-delete" onclick="deleteProduct(${p.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    // Add a new product
+    async function addProduct() {
+        const name = document.getElementById('name').value.trim();
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const price = parseFloat(document.getElementById('price').value);
+
+        if (!name || isNaN(quantity) || isNaN(price)) {
+            alert('Please fill in all product fields correctly.');
+            return;
+        }
 
         try {
-            const options = { method: method, headers: { 'Content-Type': 'application/json' } };
-            if (body) options.body = JSON.stringify(body);
+            await fetch(`${API_URL}/addProduct`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, quantity, price })
+            });
 
-            const response = await fetch(endpoint, options);
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                const data = await response.json();
-                jsonDisplay.innerText = JSON.stringify(data, null, 2);
-            } else {
-                const text = await response.text();
-                jsonDisplay.innerText = text;
-            }
+            document.getElementById('name').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('price').value = '';
+            
+            loadProducts();
         } catch (error) {
-            jsonDisplay.innerText = `Error: ${error.message}`;
+            alert('Failed to add product: ' + error.message);
         }
     }
 
-    function createSampleProduct(btn) {
-        const newProduct = {
-            name: "Headphone",
-            quantity: 2,
-            price: 600.0
-        };
-        loadData('/products/addProduct', 'POST', newProduct, btn);
+    // Delete a product
+    async function deleteProduct(id) {
+        if (!confirm(`Are you sure you want to delete Product #${id}?`)) return;
+
+        try {
+            await fetch(`${API_URL}/delete/${id}`, { method: 'DELETE' });
+            loadProducts();
+        } catch (error) {
+            alert('Failed to delete product: ' + error.message);
+        }
     }
 
-    loadData('/products', 'GET', null, document.querySelector('.btn'));
+    // Load products on initial page load
+    loadProducts();
 </script>
 
 </body>
