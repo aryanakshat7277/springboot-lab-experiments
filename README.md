@@ -1,6 +1,6 @@
 # Spring Boot & Spring Security Lab Experiments Collection 🚀
 
-A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, and Unit Testing with JUnit 5 & Mockito.
+A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, Unit Testing with JUnit 5 & Mockito, and TDD Integration Testing with H2 & TestRestTemplate.
 
 ---
 
@@ -8,8 +8,9 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 | Project Directory | Description | Primary Features & Endpoints |
 |---|---|---|
-| 🧪 **`JUnitDemo`** *(Part 1 Video)* | Unit Testing with JUnit 5 & Spring Data JPA | `@DataJpaTest`, `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll`, Custom JPQL & Native SQL testing |
-| 🎭 **`MockitoDemo`** *(Part 2 Video)* | Advanced Unit Testing with Mockito Framework | Service & Controller mocking (`@ExtendWith(MockitoExtension.class)`, `@Mock`, `@InjectMocks`, `@MockBean`, `willDoNothing()`, `assertThrows()`) |
+| 🚀 **`IntegrationTestDemo`** *(JavaTechie Video)* | TDD Integration Testing with JUnit 5 & H2 | `@SpringBootTest(webEnvironment = RANDOM_PORT)`, `TestRestTemplate`, `H2` embedded database verification (`POST`, `GET`, `PUT`, `DELETE`) |
+| 🧪 **`JUnitDemo`** *(CodeSnippetJava Part 1)* | Unit Testing with JUnit 5 & Spring Data JPA | `@DataJpaTest`, `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll`, Custom JPQL & Native SQL testing |
+| 🎭 **`MockitoDemo`** *(CodeSnippetJava Part 2)* | Advanced Unit Testing with Mockito Framework | Service & Controller mocking (`@ExtendWith(MockitoExtension.class)`, `@Mock`, `@InjectMocks`, `@MockBean`, `willDoNothing()`, `assertThrows()`) |
 | ⚡ **`MultiDatabases`** | Connecting to Multiple DataSources in Spring Data JPA | Dual H2 Databases (`bookdb` & `studentdb`), `@Primary` configuration, `/api/all`, `/api/db1/books`, `/api/db2/students` |
 | 🔐 **`SpringSecurityDemo`** | Role-Based Access Control (RBAC) & Spring Security | `/welcome` (Public), `/user` (`ROLE_USER`), `/admin` (`ROLE_ADMIN`), 403 Forbidden handling |
 | 🎓 **`StudentCRUD`** | Spring Data JPA CRUD Operations & Interactive Web UI | H2 Database (`/h2-console`), REST endpoints (`/api/students`), Interactive Web REST Client (`/`) |
@@ -49,22 +50,28 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## ▶️ Running an Experiment in STS
 
-1. In **Package Explorer**, expand the desired project (e.g. `MockitoDemo`).
-2. Expand `src/main/java` → find the main application class (e.g. `MockitoDemoApplication.java`).
+1. In **Package Explorer**, expand the desired project (e.g. `IntegrationTestDemo`).
+2. Expand `src/main/java` → find the main application class (e.g. `IntegrationTestDemoApplication.java`).
 3. **Right-click** on the main class file → **Run As** → **Spring Boot App**.
 4. Check the **Console** panel at the bottom to verify server startup on port `8080`.
 
 ---
 
-## 🧪 Running Unit Tests in STS / Maven
+## 🧪 Running Integration & Unit Tests in STS / Maven
 
-### 1. `JUnitDemo` (Part 1 - JUnit 5 Suite):
+### 1. `IntegrationTestDemo` (JavaTechie TDD Integration Test Suite):
+```bash
+cd IntegrationTestDemo
+mvn clean test
+```
+
+### 2. `JUnitDemo` (JUnit 5 Suite):
 ```bash
 cd JUnitDemo
 mvn clean test
 ```
 
-### 2. `MockitoDemo` (Part 2 - Mockito Suite):
+### 3. `MockitoDemo` (Mockito Suite):
 ```bash
 cd MockitoDemo
 mvn clean test
@@ -76,20 +83,25 @@ Or in STS: Right-click any test class → **Run As** → **JUnit Test**.
 
 ## 🔑 Credentials & Endpoints Summary
 
-### 1. `JUnitDemo` (Port 8080)
-* **H2 Console**: `http://localhost:8080/h2-console`
-* **Test Suite**: `EmployeeRepositoryTests.java` (Tests save, find, JPQL, Native SQL queries)
-
-### 2. `MockitoDemo` (Port 8080)
+### 1. `IntegrationTestDemo` (Port 8080)
 * **Interactive Dashboard**: `http://localhost:8080/`
-* **REST Endpoints**: `/api/employees` (GET, POST, PUT, DELETE)
-* **Test Suites**: `EmployeeServiceTests.java` & `EmployeeControllerTests.java`
+* **H2 Console**: `http://localhost:8080/h2-console`
+* **REST Endpoints**: `/products/addProduct`, `/products`, `/products/{id}`, `/products/update/{id}`, `/products/delete/{id}`
+* **Integration Test**: `ProductIntegrationTests.java`
 
-### 3. `MultiDatabases` (Port 8080)
+### 2. `JUnitDemo` (Port 8080)
+* **H2 Console**: `http://localhost:8080/h2-console`
+* **Test Suite**: `EmployeeRepositoryTests.java`
+
+### 3. `MockitoDemo` (Port 8080)
+* **Interactive Dashboard**: `http://localhost:8080/`
+* **REST Endpoints**: `/api/employees`
+
+### 4. `MultiDatabases` (Port 8080)
 * **Interactive Dashboard**: `http://localhost:8080/`
 * **Combined Dual DB Endpoint**: `http://localhost:8080/api/all`
 
-### 4. `SpringSecurityDemo` (Port 8080)
+### 5. `SpringSecurityDemo` (Port 8080)
 * **Public Welcome**: `http://localhost:8080/welcome`
 * **User Endpoint**: `http://localhost:8080/user` *(Username: `user` \| Password: `user`)*
 * **Admin Endpoint**: `http://localhost:8080/admin` *(Username: `admin` \| Password: `admin`)*
