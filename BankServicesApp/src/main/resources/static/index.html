@@ -1,33 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SBI Bank Portal</title>
+    <title>Bank Application</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; padding: 40px; background: #f8fafc; color: #0f172a; }
-        .card { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h1 { color: #1e40af; margin-bottom: 5px; }
-        p { color: #64748b; margin-bottom: 25px; }
-        .btn-list { display: flex; flex-direction: column; gap: 12px; }
-        a.btn { display: block; padding: 14px 20px; background: #2563eb; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
-        a.btn:hover { background: #1d4ed8; }
-        a.btn-green { background: #16a34a; }
-        a.btn-green:hover { background: #15803d; }
-        a.btn-health { background: #0284c7; }
-        a.btn-health:hover { background: #0369a1; }
+        body { font-family: sans-serif; padding: 30px; }
+        ul { line-height: 2; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>🏛️ State Bank of India Portal</h1>
-        <p>Spring Boot Application for Bank Services, Pune Branches & Health Check</p>
+    <h2>🏦 Bank Application</h2>
 
-        <div class="btn-list">
-            <a href="/branches" class="btn">🏢 1st URL: Pune Branches (10 Branches Table)</a>
-            <a href="/services" class="btn btn-green">💳 2nd URL: Bank Services (Services Table)</a>
-            <a href="/health" class="btn btn-health">🟢 Health Status Parameter (/health -> UP)</a>
-        </div>
-    </div>
+    <ul>
+        <li><a href="/branches">URL 1: Pune Branches (10 Branches Table)</a></li>
+        <li><a href="/services">URL 2: Bank Services (Services Table)</a></li>
+        <li><a href="/health">Health Parameter (/health)</a></li>
+    </ul>
 
 </body>
 </html>
