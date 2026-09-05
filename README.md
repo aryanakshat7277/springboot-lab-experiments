@@ -1,6 +1,6 @@
 # Spring Boot & Spring Security Lab Experiments Collection 🚀
 
-A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, Unit Testing with JUnit 5 & Mockito, TDD Integration Testing with H2 & TestRestTemplate, and Auto-Configured Beans Inspection.
+A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, Unit Testing with JUnit 5 & Mockito, TDD Integration Testing with H2 & TestRestTemplate, and Spring Health Monitoring.
 
 ---
 
@@ -8,7 +8,8 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 | Project Directory | Description | Primary Features & Endpoints |
 |---|---|---|
-| 🏦 **`BankServicesDemo`** *(New Experiment)* | Bank REST Services & Auto-Configured Beans Console Printer | `GET /bank/name` (Bank Name String), `GET /bank/address` (Bank Address String), Console Bean Listing (`CommandLineRunner`), `GET /bank/beans` |
+| 🏢 **`BankServicesApp`** *(New Experiment)* | Bank Pune Branches, Services Tables & Health Check | `/branches` (10 Pune Branches HTML Table), `/services` (Bank Services HTML Table), `/health` (`status: UP`) |
+| 🏦 **`BankServicesDemo`** | Bank REST Services & Auto-Configured Beans Console Printer | `GET /name` (Bank Name String), `GET /address` (Bank Address String), Console Bean Listing (`CommandLineRunner`) |
 | 🚀 **`IntegrationTestDemo`** *(JavaTechie Video)* | TDD Integration Testing with JUnit 5 & H2 | `@SpringBootTest(webEnvironment = RANDOM_PORT)`, `TestRestTemplate`, `H2` embedded database verification (`POST`, `GET`, `PUT`, `DELETE`) |
 | 🧪 **`JUnitDemo`** *(CodeSnippetJava Part 1)* | Unit Testing with JUnit 5 & Spring Data JPA | `@DataJpaTest`, `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll`, Custom JPQL & Native SQL testing |
 | 🎭 **`MockitoDemo`** *(CodeSnippetJava Part 2)* | Advanced Unit Testing with Mockito Framework | Service & Controller mocking (`@ExtendWith(MockitoExtension.class)`, `@Mock`, `@InjectMocks`, `@MockBean`, `willDoNothing()`, `assertThrows()`) |
@@ -51,24 +52,24 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## ▶️ Running an Experiment in STS
 
-1. In **Package Explorer**, expand the desired project (e.g. `BankServicesDemo`).
-2. Expand `src/main/java` → find the main application class (e.g. `BankServicesDemoApplication.java`).
+1. In **Package Explorer**, expand the desired project (e.g. `BankServicesApp`).
+2. Expand `src/main/java` → find the main application class (e.g. `BankServicesAppApplication.java`).
 3. **Right-click** on the main class file → **Run As** → **Spring Boot App**.
-4. Check the **Console** panel at the bottom to verify server startup and view the auto-configured Spring Boot beans list!
+4. Check the **Console** panel at the bottom to verify server startup on port `8080`.
 
 ---
 
 ## 🧪 Running Unit & Integration Tests in STS / Maven
 
-### 1. `BankServicesDemo` Test Suite:
+### 1. `BankServicesApp` Test Suite:
 ```bash
-cd BankServicesDemo
+cd BankServicesApp
 mvn clean test
 ```
 
-### 2. `IntegrationTestDemo` Test Suite:
+### 2. `BankServicesDemo` Test Suite:
 ```bash
-cd IntegrationTestDemo
+cd BankServicesDemo
 mvn clean test
 ```
 
@@ -78,22 +79,19 @@ Or in STS: Right-click any test class → **Run As** → **JUnit Test**.
 
 ## 🔑 Credentials & Endpoints Summary
 
-### 1. `BankServicesDemo` (Port 8080)
-* **1st RESTful URL**: `http://localhost:8080/bank/name` (Returns Bank Name String)
-* **2nd RESTful URL**: `http://localhost:8080/bank/address` (Returns Bank Address String)
-* **Auto-Configured Beans Endpoint**: `http://localhost:8080/bank/beans`
-* **Interactive Dashboard**: `http://localhost:8080/`
+### 1. `BankServicesApp` (Port 8080)
+* **1st RESTful URL**: `http://localhost:8080/branches` (Returns HTML page with 10 Pune Branches Table)
+* **2nd RESTful URL**: `http://localhost:8080/services` (Returns HTML page with Bank Services Table)
+* **Health Endpoint**: `http://localhost:8080/health` (Returns `{"status":"UP"}`)
+* **Interactive Portal**: `http://localhost:8080/`
 
-### 2. `IntegrationTestDemo` (Port 8080)
+### 2. `BankServicesDemo` (Port 8080)
+* **1st RESTful URL**: `http://localhost:8080/name` (Returns Bank Name String)
+* **2nd RESTful URL**: `http://localhost:8080/address` (Returns Bank Address String)
+
+### 3. `IntegrationTestDemo` (Port 8080)
 * **Interactive Dashboard**: `http://localhost:8080/`
 * **H2 Console**: `http://localhost:8080/h2-console`
-* **REST Endpoints**: `/products/addProduct`, `/products`, `/products/{id}`
-
-### 3. `SpringSecurityDemo` (Port 8080)
-* **Public Welcome**: `http://localhost:8080/welcome`
-* **User Endpoint**: `http://localhost:8080/user` *(Username: `user` \| Password: `user`)*
-* **Admin Endpoint**: `http://localhost:8080/admin` *(Username: `admin` \| Password: `admin`)*
-* **Logout**: `http://localhost:8080/logout`
 
 ---
 
