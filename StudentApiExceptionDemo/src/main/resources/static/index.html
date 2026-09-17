@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student API Exception Tester</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 30px; background: #f8fafc; color: #0f172a; max-width: 900px; margin: 0 auto; }
+        .card { background: white; border-radius: 8px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        h1 { margin-bottom: 10px; color: #1e293b; }
+        p { color: #64748b; margin-bottom: 20px; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 16px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; background: #2563eb; color: white; }
+        button:hover { opacity: 0.9; }
+        button.btn-404 { background: #eab308; color: black; }
+        button.btn-409 { background: #f97316; }
+        button.btn-400 { background: #ef4444; }
+        pre { background: #0f172a; color: #38bdf8; padding: 16px; border-radius: 6px; font-family: monospace; overflow-x: auto; font-size: 0.9rem; }
+        .status-badge { font-weight: bold; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px; }
+        .s-200 { background: #dcfce7; color: #15803d; }
+        .s-400 { background: #fee2e2; color: #b91c1c; }
+        .s-404 { background: #fef9c3; color: #a16207; }
+        .s-409 { background: #ffedd5; color: #c2410c; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🎓 Student Management REST API</h1>
+    <p>Global Exception Handling & Validation Demo (@RestControllerAdvice)</p>
+
+    <div class="btn-group">
+        <button onclick="testApi('/api/students', 'GET')">✅ 1. GET All Students (200 OK)</button>
+        <button class="btn-404" onclick="testApi('/api/students/99', 'GET')">⚠️ 2. GET Invalid ID #99 (404 Not Found)</button>
+        <button class="btn-409" onclick="testDuplicate()">⚠️ 3. POST Duplicate Email (409 Conflict)</button>
+        <button class="btn-400" onclick="testInvalidPayload()">❌ 4. POST Invalid Payload (400 Bad Request)</button>
+    </div>
+
+    <div id="statusBadge" class="status-badge s-200">HTTP Status: Ready</div>
+    <pre id="responseJson">// Click any button above to test REST API & Global Exception Handling JSON response</pre>
+</div>
+
+<script>
+    async function testApi(url, method, body = null) {
+        const statusBadge = document.getElementById('statusBadge');
+        const responseJson = document.getElementById('responseJson');
+        responseJson.innerText = 'Sending HTTP request...';
+
+        try {
+            const options = { method: method, headers: { 'Content-Type': 'application/json' } };
+            if (body) options.body = JSON.stringify(body);
+
+            const res = await fetch(url, options);
+            const data = await res.json();
+
+            statusBadge.innerText = `HTTP Status: ${res.status} ${res.statusText}`;
+            statusBadge.className = `status-badge s-${res.status}`;
+            responseJson.innerText = JSON.stringify(data, null, 2);
+        } catch (e) {
+            responseJson.innerText = 'Error: ' + e.message;
+        }
+    }
+
+    function testDuplicate() {
+        testApi('/api/students', 'POST', {
+            name: "Duplicate User",
+            email: "aryan@example.com", // Duplicate Email!
+            course: "Computer Science",
+            age: 21
+        });
+    }
+
+    function testInvalidPayload() {
+        testApi('/api/students', 'POST', {
+            name: "",             // Invalid: blank name!
+            email: "invalid-email", // Invalid: wrong email format!
+            course: "",           // Invalid: blank course!
+            age: 12               // Invalid: age under 18!
+        });
+    }
+</script>
+
+</body>
+</html>

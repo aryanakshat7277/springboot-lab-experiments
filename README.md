@@ -8,7 +8,8 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 | Project Directory | Description | Primary Features & Endpoints |
 |---|---|---|
-| 🏢 **`BankServicesApp`** *(New Experiment)* | Bank Pune Branches, Services Tables & Health Check | `/branches` (10 Pune Branches HTML Table), `/services` (Bank Services HTML Table), `/health` (`status: UP`) |
+| 🎓 **`StudentApiExceptionDemo`** *(New Experiment)* | Student REST API with Global Exception Handling & Validation | Custom `StudentNotFoundException` (404), `DuplicateStudentException` (409), Input Validation (`@Valid` -> 400), `@RestControllerAdvice`, standard JSON error response payloads |
+| 🏢 **`BankServicesApp`** | Bank Pune Branches, Services Tables & Health Check | `/branches` (10 Pune Branches HTML Table), `/services` (Bank Services HTML Table), `/health` (`status: UP`) |
 | 🏦 **`BankServicesDemo`** | Bank REST Services & Auto-Configured Beans Console Printer | `GET /name` (Bank Name String), `GET /address` (Bank Address String), Console Bean Listing (`CommandLineRunner`) |
 | 🚀 **`IntegrationTestDemo`** *(JavaTechie Video)* | TDD Integration Testing with JUnit 5 & H2 | `@SpringBootTest(webEnvironment = RANDOM_PORT)`, `TestRestTemplate`, `H2` embedded database verification (`POST`, `GET`, `PUT`, `DELETE`) |
 | 🧪 **`JUnitDemo`** *(CodeSnippetJava Part 1)* | Unit Testing with JUnit 5 & Spring Data JPA | `@DataJpaTest`, `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll`, Custom JPQL & Native SQL testing |
@@ -52,24 +53,24 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## ▶️ Running an Experiment in STS
 
-1. In **Package Explorer**, expand the desired project (e.g. `BankServicesApp`).
-2. Expand `src/main/java` → find the main application class (e.g. `BankServicesAppApplication.java`).
+1. In **Package Explorer**, expand the desired project (e.g. `StudentApiExceptionDemo`).
+2. Expand `src/main/java` → find the main application class (e.g. `StudentApiExceptionDemoApplication.java`).
 3. **Right-click** on the main class file → **Run As** → **Spring Boot App**.
 4. Check the **Console** panel at the bottom to verify server startup on port `8080`.
 
 ---
 
-## 🧪 Running Unit & Integration Tests in STS / Maven
+## 🧪 Running Unit & Exception Tests in STS / Maven
 
-### 1. `BankServicesApp` Test Suite:
+### 1. `StudentApiExceptionDemo` Test Suite:
 ```bash
-cd BankServicesApp
+cd StudentApiExceptionDemo
 mvn clean test
 ```
 
-### 2. `BankServicesDemo` Test Suite:
+### 2. `BankServicesApp` Test Suite:
 ```bash
-cd BankServicesDemo
+cd BankServicesApp
 mvn clean test
 ```
 
@@ -79,19 +80,16 @@ Or in STS: Right-click any test class → **Run As** → **JUnit Test**.
 
 ## 🔑 Credentials & Endpoints Summary
 
-### 1. `BankServicesApp` (Port 8080)
+### 1. `StudentApiExceptionDemo` (Port 8080)
+* **GET All Students**: `http://localhost:8080/api/students` (200 OK)
+* **GET Student by ID**: `http://localhost:8080/api/students/{id}` (200 OK or 404 Not Found)
+* **POST Create Student**: `http://localhost:8080/api/students` (201 Created, 400 Bad Request, 409 Conflict)
+* **Interactive Exception Tester Dashboard**: `http://localhost:8080/`
+
+### 2. `BankServicesApp` (Port 8080)
 * **1st RESTful URL**: `http://localhost:8080/branches` (Returns HTML page with 10 Pune Branches Table)
 * **2nd RESTful URL**: `http://localhost:8080/services` (Returns HTML page with Bank Services Table)
 * **Health Endpoint**: `http://localhost:8080/health` (Returns `{"status":"UP"}`)
-* **Interactive Portal**: `http://localhost:8080/`
-
-### 2. `BankServicesDemo` (Port 8080)
-* **1st RESTful URL**: `http://localhost:8080/name` (Returns Bank Name String)
-* **2nd RESTful URL**: `http://localhost:8080/address` (Returns Bank Address String)
-
-### 3. `IntegrationTestDemo` (Port 8080)
-* **Interactive Dashboard**: `http://localhost:8080/`
-* **H2 Console**: `http://localhost:8080/h2-console`
 
 ---
 
