@@ -1,64 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HTTP Exception Handling Demo</title>
+    <title>HTTP Exceptions</title>
     <style>
-        body { font-family: system-ui, sans-serif; padding: 40px; background: #f8fafc; color: #0f172a; max-width: 850px; margin: 0 auto; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h1 { color: #1e293b; margin-bottom: 5px; }
-        p { color: #64748b; margin-bottom: 25px; }
-        .btn-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        button { padding: 12px 18px; font-weight: bold; border-radius: 6px; border: none; cursor: pointer; color: white; transition: transform 0.1s; }
-        button:active { transform: scale(0.98); }
-        .btn-200 { background: #16a34a; }
-        .btn-400 { background: #ca8a04; }
-        .btn-401 { background: #d97706; }
-        .btn-403 { background: #ea580c; }
-        .btn-404 { background: #dc2626; }
-        .btn-409 { background: #9333ea; }
-        .btn-500 { background: #475569; }
-        .status-badge { font-weight: bold; padding: 6px 12px; border-radius: 4px; display: inline-block; margin-bottom: 12px; font-size: 0.95rem; }
-        .s-200 { background: #dcfce7; color: #15803d; }
-        .s-400, .s-401, .s-403, .s-404, .s-409 { background: #fef3c7; color: #b45309; }
-        .s-500 { background: #fee2e2; color: #b91c1c; }
-        pre { background: #0f172a; color: #38bdf8; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.95rem; line-height: 1.5; overflow-x: auto; min-height: 150px; }
+        body { font-family: sans-serif; padding: 30px; }
+        .btn-list { margin-bottom: 20px; }
+        button { margin: 4px; padding: 8px 12px; cursor: pointer; }
+        pre { background: #f0f4f8; padding: 15px; border-radius: 5px; font-family: monospace; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>🚨 HTTP Exception Handling Demo</h1>
-    <p>Spring Boot Global Exception Handling with Custom HTTP Status Codes (@RestControllerAdvice)</p>
+    <h2>HTTP Exception Handling</h2>
 
-    <div class="btn-grid">
-        <button class="btn-200" onclick="testCode('200')">🟢 200 OK</button>
-        <button class="btn-400" onclick="testCode('400')">🟡 400 Bad Request</button>
-        <button class="btn-401" onclick="testCode('401')">🔑 401 Unauthorized</button>
-        <button class="btn-403" onclick="testCode('403')">🚫 403 Forbidden</button>
-        <button class="btn-404" onclick="testCode('404')">🔍 404 Not Found</button>
-        <button class="btn-409" onclick="testCode('409')">⚡ 409 Conflict</button>
-        <button class="btn-500" onclick="testCode('500')">💥 500 Server Error</button>
+    <div class="btn-list">
+        <button onclick="testApi('200')">200 OK</button>
+        <button onclick="testApi('400')">400 Bad Request</button>
+        <button onclick="testApi('401')">401 Unauthorized</button>
+        <button onclick="testApi('403')">403 Forbidden</button>
+        <button onclick="testApi('404')">404 Not Found</button>
+        <button onclick="testApi('409')">409 Conflict</button>
+        <button onclick="testApi('500')">500 Server Error</button>
     </div>
 
-    <div id="badge" class="status-badge s-200">HTTP Status: Click any button</div>
-    <pre id="output">// JSON Response payload will appear here...</pre>
-</div>
+    <h3 id="statusText">HTTP Status: Ready</h3>
+    <pre id="result">Click any button above to see response</pre>
 
 <script>
-    async function testCode(code) {
-        const badge = document.getElementById('badge');
-        const output = document.getElementById('output');
-        output.innerText = `Calling GET /api/test/${code}...`;
-
+    async function testApi(code) {
+        document.getElementById('statusText').innerText = `HTTP Status: GET /api/test/${code}...`;
         try {
             const res = await fetch(`/api/test/${code}`);
             const data = await res.json();
-
-            badge.innerText = `HTTP Status: ${res.status} ${res.statusText}`;
-            badge.className = `status-badge s-${res.status}`;
-            output.innerText = JSON.stringify(data, null, 2);
+            document.getElementById('statusText').innerText = `HTTP Status: ${res.status} ${res.statusText}`;
+            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
         } catch (e) {
-            output.innerText = 'Error: ' + e.message;
+            document.getElementById('result').innerText = 'Error: ' + e.message;
         }
     }
 </script>
