@@ -1,6 +1,6 @@
 # Spring Boot & Spring Security Lab Experiments Collection 🚀
 
-A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, Unit Testing with JUnit 5 & Mockito, TDD Integration Testing with H2 & TestRestTemplate, and HTTP Status Code Exception Handling.
+A comprehensive, production-ready collection of **Spring Boot 3.x** lab experiments covering REST APIs, Dependency Injection, Global Exception Handling, Spring Security (Role-Based Access Control), Spring Data JPA Multi-Databases, Unit Testing with JUnit 5 & Mockito, TDD Integration Testing with H2 & TestRestTemplate, HTTP Status Code Exception Handling, and Real-Time Notifications using Server-Sent Events (SSE).
 
 ---
 
@@ -8,7 +8,8 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 | Project Directory | Description | Primary Features & Endpoints |
 |---|---|---|
-| 🚨 **`HttpExceptionDemo`** *(New Experiment)* | HTTP Status Code Exception Handling & Simple UI | `@RestControllerAdvice`, Custom exceptions for `200`, `400`, `401`, `403`, `404`, `409`, `500` status codes, interactive simple UI |
+| 🔔 **`RealTimeNotificationDemo`** *(New Experiment)* | Spring Boot Real-Time Notifications (SSE) & Simple UI | Server-Sent Events (`SseEmitter`), `/api/notifications/subscribe`, `/api/notifications/send`, periodic system heartbeats, simple UI |
+| 🚨 **`HttpExceptionDemo`** | HTTP Status Code Exception Handling & Simple UI | `@RestControllerAdvice`, Custom exceptions for `200`, `400`, `401`, `403`, `404`, `409`, `500` status codes, interactive simple UI |
 | 🎓 **`StudentApiExceptionDemo`** | Student REST API with Global Exception Handling & Validation | Custom `StudentNotFoundException` (404), `DuplicateStudentException` (409), Input Validation (`@Valid` -> 400), `@RestControllerAdvice` |
 | 🏢 **`BankServicesApp`** | Bank Pune Branches, Services Tables & Health Check | `/branches` (10 Pune Branches HTML Table), `/services` (Bank Services HTML Table), `/health` (`status: UP`) |
 | 🏦 **`BankServicesDemo`** | Bank REST Services & Auto-Configured Beans Console Printer | `GET /name` (Bank Name String), `GET /address` (Bank Address String), Console Bean Listing (`CommandLineRunner`) |
@@ -54,24 +55,24 @@ A comprehensive, production-ready collection of **Spring Boot 3.x** lab experime
 
 ## ▶️ Running an Experiment in STS
 
-1. In **Package Explorer**, expand the desired project (e.g. `HttpExceptionDemo`).
-2. Expand `src/main/java` → find the main application class (e.g. `HttpExceptionDemoApplication.java`).
+1. In **Package Explorer**, expand the desired project (e.g. `RealTimeNotificationDemo`).
+2. Expand `src/main/java` → find the main application class (e.g. `RealTimeNotificationDemoApplication.java`).
 3. **Right-click** on the main class file → **Run As** → **Spring Boot App**.
 4. Check the **Console** panel at the bottom to verify server startup on port `8080`.
 
 ---
 
-## 🧪 Running Exception & Status Code Tests in STS / Maven
+## 🧪 Running Real-Time & Unit Tests in STS / Maven
 
-### 1. `HttpExceptionDemo` Test Suite:
+### 1. `RealTimeNotificationDemo` Test Suite:
 ```bash
-cd HttpExceptionDemo
+cd RealTimeNotificationDemo
 mvn clean test
 ```
 
-### 2. `StudentApiExceptionDemo` Test Suite:
+### 2. `HttpExceptionDemo` Test Suite:
 ```bash
-cd StudentApiExceptionDemo
+cd HttpExceptionDemo
 mvn clean test
 ```
 
@@ -81,15 +82,10 @@ Or in STS: Right-click any test class → **Run As** → **JUnit Test**.
 
 ## 🔑 Credentials & Endpoints Summary
 
-### 1. `HttpExceptionDemo` (Port 8080)
-* **200 OK**: `http://localhost:8080/api/test/200`
-* **400 Bad Request**: `http://localhost:8080/api/test/400`
-* **401 Unauthorized**: `http://localhost:8080/api/test/401`
-* **403 Forbidden**: `http://localhost:8080/api/test/403`
-* **404 Not Found**: `http://localhost:8080/api/test/404`
-* **409 Conflict**: `http://localhost:8080/api/test/409`
-* **500 Server Error**: `http://localhost:8080/api/test/500`
-* **Interactive UI**: `http://localhost:8080/`
+### 1. `RealTimeNotificationDemo` (Port 8080)
+* **Real-Time Notification Stream**: `http://localhost:8080/api/notifications/subscribe` (SSE)
+* **Broadcast Notification**: `http://localhost:8080/api/notifications/send` (POST)
+* **Simple Real-Time UI**: `http://localhost:8080/`
 
 ---
 
